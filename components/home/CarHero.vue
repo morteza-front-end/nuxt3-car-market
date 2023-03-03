@@ -1,3 +1,9 @@
+<script setup>
+const city = ref("")
+function handleSearch(){
+  navigateTo(`/city/${city.value}/car`)
+}
+</script>
 <template>
   <div
       class="relative h-screen w-100 bg-no-repeat bg-cover bg-bottom bg-[url(/images/car-ferrari.jpg)]"
@@ -11,8 +17,8 @@
         <div
             class="font-serif w-[1000px] text-2xl rounded-full bg-white flex justify-between overflow-hidden drop-shadow-2xl mx-auto"
         >
-          <base-input/>
-          <base-button/>
+          <base-input v-model="city"/>
+          <base-button @click="handleSearch"/>
 
         </div>
         <!-- HOME SEARCH BAR -->
