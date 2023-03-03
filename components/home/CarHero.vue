@@ -19,7 +19,7 @@ function handleSearch(){
         <div
             class="font-serif w-[1000px] text-2xl rounded-full bg-white flex justify-between overflow-hidden drop-shadow-2xl mx-auto"
         >
-          <base-input v-model="city" :class="cityError?'border border-red-500':''"/>
+          <base-input v-model="city" @keydown.enter="handleSearch" :class="cityError?'border border-red-500':''"/>
           <base-button @click="handleSearch"/>
 
         </div>

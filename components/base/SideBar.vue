@@ -22,7 +22,7 @@
     </div>
 
     <div
-        class="p-5 flex justify-between relative cursor-pointer border-b">
+        class="p-5 flex justify-between relative cursor-pointer">
       <h3>Price</h3>
       <h3 class="text-blue-400 capitalize"></h3>
     </div>
