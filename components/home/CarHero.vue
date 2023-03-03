@@ -1,6 +1,8 @@
 <script setup>
 const city = ref("")
+const cityError = ref(false)
 function handleSearch(){
+  if(!city.value) return cityError.value= true
   navigateTo(`/city/${city.value}/car`)
 }
 </script>
@@ -17,7 +19,7 @@ function handleSearch(){
         <div
             class="font-serif w-[1000px] text-2xl rounded-full bg-white flex justify-between overflow-hidden drop-shadow-2xl mx-auto"
         >
-          <base-input v-model="city"/>
+          <base-input v-model="city" :class="cityError?'border border-red-500':''"/>
           <base-button @click="handleSearch"/>
 
         </div>
