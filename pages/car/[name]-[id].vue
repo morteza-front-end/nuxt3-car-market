@@ -17,7 +17,7 @@ const car = computed(()=>{
 <template>
   <!-- CAR DETAIL PAGE -->
 
-    <div>
+    <div v-if="car">
       <!-- CAR HERO -->
       <car-detail-hero :car="car" />
       <!-- CAR HERO -->
