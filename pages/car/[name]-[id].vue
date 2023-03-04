@@ -13,11 +13,17 @@ definePageMeta({
 const car = computed(()=>{
   return  cars.find(car=> car.id === +(route.params.id))
 })
+if(!car.value){
+  throw createError({
+    statusCode: 404,
+    message: `Car with ID ${route.params.id} not found!`
+  })
+}
 </script>
 <template>
   <!-- CAR DETAIL PAGE -->
 
-    <div v-if="car">
+    <div>
       <!-- CAR HERO -->
       <car-detail-hero :car="car" />
       <!-- CAR HERO -->
