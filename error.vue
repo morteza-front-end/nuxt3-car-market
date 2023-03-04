@@ -5,7 +5,9 @@ useHead({
 })
 
 function handleError() {
-  navigateTo('/')
+  clearError({
+    redirect: '/'
+  })
 }
 </script>
 <template>
