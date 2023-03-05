@@ -7,6 +7,12 @@ const city = ref('')
 const route = useRoute()
 function changeLocation(){
   if(!city.value)return
+  if(!isNaN(parseInt(city.value))){
+    throw createError({
+      statusCode: 400,
+      message: 'Invalid city format'
+    })
+  }
   navigateTo(`/city/${city.value}/car/${route.params.make}`)
   close()
 }
