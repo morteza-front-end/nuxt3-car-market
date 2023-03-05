@@ -1,8 +1,11 @@
+<script setup>
+useHead({
+  title:'Car Trader'
+})
+</script>
+
 <template>
   <div>
-    <!-- NAVBAR    -->
-    <layout-navBar/>
-    <!-- NAVBAR    -->
     <!-- HOME HERO   -->
     <home-car-hero/>
     <!-- HOME HERO   -->

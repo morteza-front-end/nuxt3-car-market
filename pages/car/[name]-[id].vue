@@ -1,23 +1,41 @@
+<script setup>
+import {useCars} from "../../composables/useCars";
+
+const route = useRoute()
+const {cars} = useCars()
+const {toUpperCaseTitle} = useUtility()
+useHead({
+  title:`${toUpperCaseTitle(route.params.name)}`
+})
+definePageMeta({
+  layout:'custom'
+})
+const car = computed(()=>{
+  return  cars.find(car=> car.id === +(route.params.id))
+})
+if(!car.value){
+  throw createError({
+    statusCode: 404,
+    message: `Car with ID ${route.params.id} not found!`
+  })
+}
+</script>
 <template>
-  <layout-navBar/>
   <!-- CAR DETAIL PAGE -->
-  <div
-      class="mx-auto mt-4 max-w-7xl space-y-4 px-4 xs:px-8 sm:px-10 lg:px-16 pb-16 w-3/5"
-  >
+
     <div>
       <!-- CAR HERO -->
-      <car-detail-hero />
+      <car-detail-hero :car="car" />
       <!-- CAR HERO -->
     </div>
     <!-- CAR ATTRIBUTES -->
-    <car-detail-attributes />
+    <car-detail-attributes :features="car.features" />
     <!-- CAR ATTRIBUTES -->
     <!-- CAR DESCRISPTION -->
-   <car-detail-description />
+   <car-detail-description :description="car.description" />
     <!-- CAR DESCRISPTION -->
     <!-- CAR CONTACT -->
     <car-detail-contact />
     <!-- CAR CONTACT -->
-  </div>
   <!-- CAR DETAIL PAGE   -->
 </template>
