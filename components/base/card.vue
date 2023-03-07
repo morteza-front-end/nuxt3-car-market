@@ -1,15 +1,21 @@
 <script setup>
-
+import heartFilled  from '@/assets/images/heartFilled.png'
+import heartOutline from '@/assets/images/heartOutline.png'
 const props = defineProps({
   car: Object
 })
+const favored = useState(`favored-${props.car.id}`,()=>false)
+
 </script>
 <template>
   <div
-      class="shadow border w-full overflow-hidden mb-5 cursor-pointer h-[200px]"
+      class="relative shadow border w-full overflow-hidden mb-5 cursor-pointer h-[200px]"
   >
-    <nuxt-link :to="{path:`/car/${car.name}-${car.id}`}" class="flex h-full">
-      <img
+    <img :src="favored? heartFilled:heartOutline" class="absolute w-7 right-5 top-2 z-20" alt="heart" @click="favored =!favored"/>
+    <nuxt-link
+        :to="{path:`/car/${car.name}-${car.id}`}"
+        class="flex h-full">
+      <NuxtImg
           :src="car.url"
           alt=""
           class="w-[300px] h-full"
@@ -17,13 +23,13 @@ const props = defineProps({
       <div class="p-4 flex flex-col">
         <div>
           <h1 class="text-2xl text-blue-700">
-           {{car.name}}</h1>
+            {{ car.name }}</h1>
           <p class="text-gray-700">
-          {{car.description}}
+            {{ car.description }}
           </p>
         </div>
         <h1 class="mt-auto text-xl">
-          ${{car.price}}</h1>
+          ${{ car.price }}</h1>
       </div>
     </nuxt-link>
   </div>
