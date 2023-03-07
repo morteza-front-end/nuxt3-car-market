@@ -2,16 +2,19 @@
 import heartFilled  from '@/assets/images/heartFilled.png'
 import heartOutline from '@/assets/images/heartOutline.png'
 const props = defineProps({
-  car: Object
+  car: Object,
+  favored:Boolean
 })
-const favored = useState(`favored-${props.car.id}`,()=>false)
 
+const emit = defineEmits('favor')
 </script>
 <template>
   <div
       class="relative shadow border w-full overflow-hidden mb-5 cursor-pointer h-[200px]"
   >
-    <img :src="favored? heartFilled:heartOutline" class="absolute w-7 right-5 top-2 z-20" alt="heart" @click="favored =!favored"/>
+    <img :src="favored? heartFilled:heartOutline"
+         class="absolute w-7 right-5 top-2 z-20" alt="heart"
+         @click="emit('favor',car.id)"/>
     <nuxt-link
         :to="{path:`/car/${car.name}-${car.id}`}"
         class="flex h-full">
