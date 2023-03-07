@@ -9,7 +9,7 @@ const props = defineProps({
       class="shadow border w-full overflow-hidden mb-5 cursor-pointer h-[200px]"
   >
     <nuxt-link :to="{path:`/car/${car.name}-${car.id}`}" class="flex h-full">
-      <img
+      <NuxtImg
           :src="car.url"
           alt=""
           class="w-[300px] h-full"
