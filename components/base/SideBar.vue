@@ -33,7 +33,8 @@ function toggleModal(type) {
       <h3>Make</h3>
       <h3 class="text-blue-400 capitalize"
           @click="toggleModal('make')">
-        Toyota</h3>
+        {{route.params.make ?route.params.make: 'any' }}
+      </h3>
       <base-modal v-if="modal.make" :list="makes"
                   @close="toggleModal('make')"/>
     </div>
