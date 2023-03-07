@@ -10,6 +10,7 @@ function close(){
   emit('close')
 }
 const city = ref('')
+const maker = ref('')
 const route = useRoute()
 function changeLocation(){
   if(!city.value)return
@@ -20,6 +21,11 @@ function changeLocation(){
     })
   }
   navigateTo(`/city/${city.value}/car/${route.params.make}`)
+  close()
+}
+function changeMaker(value){
+  maker.value=value
+  navigateTo(`/city/${route.params.city}/car/${maker.value}`)
   close()
 }
 </script>
@@ -36,7 +42,7 @@ function changeLocation(){
     </template>
     <template v-else>
       <div class="grid grid-cols-3 gap-2 w-[30rem]">
-        <span v-for="item in list" class="hover:text-blue-500 hover:scale-105" @click="changeLocation">{{item}}</span>
+        <span v-for="item in list" class="hover:text-blue-500 hover:scale-105" @click="changeMaker(item)">{{item}}</span>
       </div>
     </template>
   </div>
