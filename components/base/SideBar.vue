@@ -1,11 +1,13 @@
 <script setup>
+import {useCars} from "../../composables/useCars";
+
 const route = useRoute()
 const modal = ref({
   location: false,
   make: false,
   price: false,
 })
-
+const {makes} = useCars()
 function toggleModal(type) {
   modal.value[type] = !modal.value[type]
 }
@@ -32,7 +34,7 @@ function toggleModal(type) {
       <h3 class="text-blue-400 capitalize"
           @click="toggleModal('make')">
         Toyota</h3>
-      <base-modal v-if="modal.make"
+      <base-modal v-if="modal.make" :list="makes"
                   @close="toggleModal('make')"/>
     </div>
 
