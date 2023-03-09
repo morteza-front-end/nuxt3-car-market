@@ -8,10 +8,19 @@ const modal = ref({
   price: false,
 })
 const {makes} = useCars()
+
 function toggleModal(type) {
   modal.value[type] = !modal.value[type]
 }
 
+//Price start
+const priceRang = ref({
+  min: null,
+  max: null,
+})
+function changePrice(){
+  toggleModal('price')
+}
 </script>
 
 <template>
@@ -22,7 +31,7 @@ function toggleModal(type) {
       <h3>Location</h3>
       <h3 @click="toggleModal('location')"
           class="text-blue-400 capitalize">
-          {{route.params.city}}
+        {{ route.params.city }}
       </h3>
       <base-modal v-if="modal.location"
                   @close="toggleModal('location')"/>
@@ -33,7 +42,9 @@ function toggleModal(type) {
       <h3>Make</h3>
       <h3 class="text-blue-400 capitalize"
           @click="toggleModal('make')">
-        {{route.params.make ?route.params.make: 'any' }}
+        {{
+          route.params.make ? route.params.make : 'any'
+        }}
       </h3>
       <base-modal v-if="modal.make" :list="makes"
                   @close="toggleModal('make')"/>
@@ -43,8 +54,21 @@ function toggleModal(type) {
         class="p-5 flex justify-between relative cursor-pointer">
       <h3 @click="toggleModal('price')">
         Price</h3>
-      <base-modal v-if="modal.price"
-                  @close="toggleModal('price')"/>
+      <div v-if="modal.price"
+          class="absolute border shadow left-52 p-5 top-1 -m-1 bg-white">
+        <input
+            placeholder="Min"
+            class="border p-1 rounded"
+            type="number"
+            v-model="priceRang.min"/>
+        <input placeholder="Max"
+               class="border p-1 rounded mt-2"
+               v-model="priceRang.max"/>
+        <button @click="changePrice"
+                class="bg-blue-400 w-full mt-2 rounded text-white p-1">
+          Apply
+        </button>
+      </div>
       <h3 class="text-blue-400 capitalize"></h3>
     </div>
   </div>
