@@ -18,7 +18,9 @@ const priceRang = ref({
   min: null,
   max: null,
 })
-function changePrice(){
+
+function changePrice() {
+  navigateTo(`/city/${route.params.city}/car/${route.params.car ? route.params.car : ''}?minPrice=${priceRang.min ? priceRang.min : ''}&maxPrice=${priceRang.max?priceRang.max:''}`)
   toggleModal('price')
 }
 </script>
@@ -55,7 +57,7 @@ function changePrice(){
       <h3 @click="toggleModal('price')">
         Price</h3>
       <div v-if="modal.price"
-          class="absolute border shadow left-52 p-5 top-1 -m-1 bg-white">
+           class="absolute border shadow left-52 p-5 top-1 -m-1 bg-white">
         <input
             placeholder="Min"
             class="border p-1 rounded"
