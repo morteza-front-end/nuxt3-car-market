@@ -2,6 +2,7 @@
 import {useCars} from "../../composables/useCars";
 
 const route = useRoute()
+const router = useRouter()
 const modal = ref({
   location: false,
   make: false,
@@ -20,9 +21,35 @@ const priceRang = ref({
 })
 
 function changePrice() {
-  navigateTo(`/city/${route.params.city}/car/${route.params.car ? route.params.car : ''}?minPrice=${priceRang.min ? priceRang.min : ''}&maxPrice=${priceRang.max?priceRang.max:''}`)
   toggleModal('price')
+  if (priceRang.value.min && priceRang.value.max) {
+    if (priceRang.value.min > priceRang.value.max) return
+    router.push(
+        {
+          query: {
+            minPrice:priceRang.value.min,
+            maxPrice: priceRang.value.max ,
+        }
+  }
+  )
+  }
 }
+
+const priceRangeText = computed(() => {
+  const minPrice = route.query.minPrice
+  const maxPrice = route.query.maxPrice
+  if (!minPrice & !maxPrice) {
+    return 'Any'
+  }
+  if (!minPrice & maxPrice) {
+    return `< $${maxPrice}`
+  }
+  if (minPrice & !maxPrice) {
+    return `>$${minPrice}`
+  } else {
+    return `$${minPrice}-$${maxPrice}`
+  }
+})
 </script>
 
 <template>
@@ -71,7 +98,8 @@ function changePrice() {
           Apply
         </button>
       </div>
-      <h3 class="text-blue-400 capitalize"></h3>
+      <h3 class="text-blue-400 capitalize">
+        {{ priceRangeText }}</h3>
     </div>
   </div>
 </template>
